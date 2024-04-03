@@ -18,17 +18,23 @@ import {
 } from "@chakra-ui/react";
 import { FaSignal } from "react-icons/fa";
 import styles from "../styles/KarmaLevel.module.css";
-import { GrCaretNext, GrCaretPrevious } from "react-icons/gr";
+import { GrNext, GrPrevious } from "react-icons/gr";
 import { karmaLevelData } from "./KarmaLevelData";
 import { KARMA_SAPIEN_ADDRESS, KARMA_TOKEN_ADDRESS } from "../const/addresses";
 import {
   Web3Button,
+  useActiveClaimCondition,
+  useActiveClaimConditionForWallet,
   useAddress,
+  useClaimConditions,
+  useClaimIneligibilityReasons,
   useContract,
+  useNFTBalance,
+  useOwnedNFTs,
   useTokenBalance,
   useTokenDrop,
 } from "@thirdweb-dev/react";
-import { useClaimIneligibilityReasons } from "@thirdweb-dev/react";
+import { FaLock } from "react-icons/fa";
 
 export function KarmaLevel() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,12 +45,8 @@ export function KarmaLevel() {
   const { data: tokenBalance } = useTokenBalance(tokenDrop, address);
   const toast = useToast();
   const { contract } = useContract(KARMA_SAPIEN_ADDRESS);
-  const { data, isLoading, error } = useClaimIneligibilityReasons(contract, {
-    walletAddress: address,
-    quantity: 1,
-  });
 
-  console.log(data);
+
 
   const currentLevel = karmaLevelData[currentIndex];
 
@@ -58,22 +60,16 @@ export function KarmaLevel() {
 
   return (
     <>
-      <Tooltip hasArrow label="Karma Level" aria-label="A tooltip">
-        <Button
-          w="fit-content"
-          m={"auto"}
-          leftIcon={<FaSignal />}
-          onClick={onOpen}
-          background={"transparent"}
-          color={"white"}
-          _hover={{
-            bg: "transparent",
-            color: "grey",
-          }}
-        >
-          {""}
-        </Button>
-      </Tooltip>
+      <Box onClick={onOpen} color={"white"} width={"100%"} height={"100%"}>
+        <Image
+          src="https://img.freepik.com/premium-photo/colorful-coelacanth-fish-coral-paper-cut-art-generative-ai_698447-2278.jpg?w=1380"
+          alt="karma"
+          width={"100%"}
+          height={"100%"}
+          objectFit={"cover"}
+        />
+      </Box>
+
       <Modal
         finalFocusRef={finalRef}
         isCentered
@@ -156,12 +152,15 @@ export function KarmaLevel() {
               </Box>
               <Flex align={"center"} mt={7} justify={"space-around"}>
                 <Button
-                  w={"40px"}
+                  w={"50px"}
+                  h={"50px"}
                   borderRadius={"50%"}
                   onClick={handlePrevious}
-                  disabled={currentIndex === 0}
+                  bg={"blue"}
+                  color={"white"}
+                  isDisabled={currentIndex === 0}
                 >
-                  <GrCaretPrevious />
+                  <GrPrevious />
                 </Button>
                 <Flex gap={1} textAlign={"center"} flexDir={"column"}>
                   <Text>{`LEVEL ${currentIndex + 1} Requires ${
@@ -183,19 +182,22 @@ export function KarmaLevel() {
                       console.log(e.Error);
                     }}
                   >
-                    Mint
+                    <FaLock /> "Mint"
                   </Web3Button>
                   <Text fontSize={"12px"}>
                     Karma Points needed for next evolution
                   </Text>
                 </Flex>
                 <Button
-                  w={"40px"}
+                  w={"50px"}
+                  h={"50px"}
+                  bg={"blue"}
+                  color={"white"}
                   borderRadius={"50%"}
                   onClick={handleNext}
-                  disabled={currentIndex === karmaLevelData?.length - 1}
+                  isDisabled={currentIndex === karmaLevelData?.length - 1}
                 >
-                  <GrCaretNext />
+                  <GrNext />
                 </Button>
               </Flex>
             </Box>

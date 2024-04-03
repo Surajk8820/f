@@ -54,8 +54,6 @@ export default function NFTComponent({ nft }: Props) {
     nft?.metadata?.id
   );
 
-  console.log(claimEligibility, loadingEligibility);
-
   return (
     <Flex className={styles.container}>
       <Box borderRadius={"4px"} overflow={"hidden"}>

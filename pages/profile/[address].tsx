@@ -57,7 +57,7 @@ import StatusIndicator from "../../components/StatusIndicator";
 import ClaimKarmaModal from "../../components/ClaimKarmaModal";
 import { KarmaLevel } from "../../components/KarmaLevel";
 import { SendFundModal } from "../../components/SendFundModal";
-// import Sidebar from "../../components/hash/Sidebar";
+
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -141,6 +141,19 @@ export default function ProfilePage() {
 
   useEffect(() => {
     updateCompletion();
+    if (currentUser?.hasHouseId === 0) {
+      setCardColor("#0000FF");
+    } else if (currentUser?.hasHouseId === 1) {
+      setCardColor("#6e14a7");
+    } else if (currentUser?.hasHouseId === 2) {
+      setCardColor("#FBC00E");
+    } else if (currentUser?.hasHouseId === 3) {
+      setCardColor("#04D010");
+    } else if (currentUser?.hasHouseId === 4) {
+      setCardColor("#D01110");
+    } else {
+      setCardColor("");
+    }
   }, [currentUser]);
 
   useEffect(() => {
@@ -162,6 +175,19 @@ export default function ProfilePage() {
 
   let smartWallet = useAddress();
   let personalWallet = usePersonalWalletAddress();
+
+  const musicData = [
+    {
+      name: "The Comeback Kid",
+      artist: "Lindi Ortega",
+      cover:
+        "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/7.jpg",
+      source:
+        "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/7.mp3",
+      url: "https://www.youtube.com/watch?v=me6aoX0wCV8",
+      favorited: true,
+    },
+  ];
 
   // Fetching profile data
   const fetchData = async () => {
@@ -284,23 +310,6 @@ export default function ProfilePage() {
   if (!currentUser && !address) {
     return redirectToHome();
   }
-
-  console.log(houseCardColor);
-  useEffect(() => {
-    if (currentUser?.hasHouseId === 0) {
-      setCardColor("#0000FF");
-    } else if (currentUser?.hasHouseId === 1) {
-      setCardColor("#BE1CC5");
-    } else if (currentUser?.hasHouseId === 2) {
-      setCardColor("#FBC00E");
-    } else if (currentUser?.hasHouseId === 3) {
-      setCardColor("#04D010");
-    } else if (currentUser?.hasHouseId === 4) {
-      setCardColor("#D01110");
-    } else {
-      setCardColor("");
-    }
-  }, [currentUser]);
 
   return (
     <Box className={styles.container}>
@@ -493,24 +502,7 @@ export default function ProfilePage() {
                   p={0}
                   className={styles.box}
                 >
-                  {currentUser?.hasHouseId !== null ? (
-                    <Box h={"9vh"} className={styles.houseDiv}>
-                      <Image
-                        src={currentUser?.hasHouseMetadata?.image}
-                        width={"100%"}
-                        height={"100%"}
-                        alt="house_img"
-                      />
-                      <Text
-                        className={styles.houseTxt}
-                        fontSize={{ base: "20px", md: "30px" }}
-                      >
-                        {currentUser?.hasHouseMetadata?.name}
-                      </Text>
-                    </Box>
-                  ) : (
-                    "Mint House"
-                  )}
+                  {<KarmaLevel />}
                 </Flex>
               </Box>
               {completionPercentage == 100 &&
@@ -584,7 +576,7 @@ export default function ProfilePage() {
               </Box>
             </TabList>
             <TabPanels>
-              <TabPanel p={"20px 0px"}>
+              <TabPanel p={"20px 120px"}>
                 {houseNfts?.length === 0 ? (
                   <Box className={styles.emptyNFT}>
                     {personalWallet === undefined ? (
@@ -596,24 +588,63 @@ export default function ProfilePage() {
                     )}
                   </Box>
                 ) : (
-                  <Box className={styles.nftGrid}>
-                    {houseNfts && houseNfts.length > 0
-                      ? houseNfts.map((e) => (
-                          <Box className={styles.nftCard} key={e.metadata.id}>
-                            <ThirdwebNftMedia
-                              metadata={e.metadata}
+                  <Box>
+                    {houseNfts && houseNfts.length > 0 ? (
+                      <Box
+                        className={styles.nftCard}
+                        key={houseNfts[0].metadata.id}
+                      >
+                        <Text color={houseCardColor} fontSize={"30px"}>
+                          WELCOME IBOGAN
+                        </Text>
+                        <Text
+                          fontWeight={200}
+                          letterSpacing={"2px"}
+                          fontSize={"20px"}
+                        >
+                          A tranquil haven promoting calm, dependability, and
+                          thoughtfulness. Ideal for those who value a peaceful
+                          atmosphere, seek reliability, structure, and enjoy
+                          deep introspection—a blue house for a serene and
+                          contemplative life. Daturathustars are the
+                          philosophers of the universe.
+                        </Text>
+                        <Box bg={houseCardColor} className={styles.housePlayer}>
+                          <Box className={styles.houseImg}>
+                            <Image
+                              src={houseNfts[0].metadata?.image || ""}
                               height={"100%"}
                               width={"100%"}
+                              alt="nft"
                             />
-                            <Text
-                              mt={2}
-                              color={"grey"}
-                              fontSize={"12px"}
-                            >{`TOKEN ID #${e.metadata.id}`}</Text>
-                            <Text>{e.metadata.name}</Text>
                           </Box>
-                        ))
-                      : null}
+                          <Box className={styles.player}>
+                            <Box bg={"transparent"}>
+                              <Box className={styles.playerCover}>
+                                <Image
+                                  w={"100%"}
+                                  alt="cover"
+                                  src={musicData[0]?.cover}
+                                />
+                              </Box>
+                              <Box color={'#141414'}>
+                                <Text>{musicData[0]?.name}</Text>
+                                <Text
+                                  fontSize={"12px"}
+                                >{`By ${musicData[0]?.artist}`}</Text>
+                              </Box>
+                              <Box mt={"20px"}>
+                                <audio
+                                  controls
+                                  src="https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/2.mp3"
+                                ></audio>
+                                
+                              </Box>
+                            </Box>
+                          </Box>
+                        </Box>
+                      </Box>
+                    ) : null}
                   </Box>
                 )}
               </TabPanel>
@@ -624,7 +655,7 @@ export default function ProfilePage() {
                       "No NFT's in your wallet"
                     ) : (
                       <Button onClick={(e) => redirectToMint("house")}>
-                        Mint House
+                        Mint Hash
                       </Button>
                     )}
                   </Box>
@@ -657,7 +688,7 @@ export default function ProfilePage() {
                       "No NFT's in your wallet"
                     ) : (
                       <Button onClick={(e) => redirectToMint("house")}>
-                        Mint House
+                        Mint Conzura
                       </Button>
                     )}
                   </Box>

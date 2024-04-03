@@ -107,20 +107,40 @@
   color: white;
 }
 
-.houseDiv {
-  position: relative;
+.housePlayer {
+  display: flex;
+  border-radius: 10px;
+  margin-top: 60px;
+  height: 40vh;
 }
 
-.houseTxt {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
-  transition: 0.5s ease-in-out;
-  width: 100%;
-  height: 100%;
-  font-size: 25px;
+.houseImg {
+  box-shadow: rgb(0, 0, 0) 0px 20px 30px -10px;
+}
+
+.playerCover {
+  width: 150px;
+  height: 150px;
+}
+
+.playerCover {
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.housePlayer > div:nth-child(1) {
+  width: 60%;
+  overflow: hidden;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.housePlayer > div:nth-child(2) {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
 }
 
 .houseDiv:hover .houseTxt {
@@ -194,7 +214,9 @@
 .btn {
   width: 100%;
   background-color: transparent;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;  color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  color: white;
   padding: 10px;
   transition: 0.3s ease-in-out;
 }
@@ -231,10 +253,10 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
+  border: 1px solid red;
 }
 
 .nftCard {
-  border: 1px solid grey;
   height: fit-content;
   padding: 8px;
 }
