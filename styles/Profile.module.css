@@ -253,12 +253,19 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
-  border: 1px solid red;
 }
 
 .nftCard {
   height: fit-content;
   padding: 8px;
+  border: 1px solid grey;
+}
+
+.nftCard > button{
+  width: 100%;
+  background-color: blue;
+  color: white;
+  font-weight: 400;
 }
 
 .mobileNav {

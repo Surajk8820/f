@@ -182,7 +182,7 @@ export function KarmaLevel() {
                       console.log(e.Error);
                     }}
                   >
-                    <FaLock /> "Mint"
+                    <FaLock />
                   </Web3Button>
                   <Text fontSize={"12px"}>
                     Karma Points needed for next evolution

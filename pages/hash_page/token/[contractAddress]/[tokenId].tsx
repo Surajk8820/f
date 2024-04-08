@@ -35,6 +35,7 @@ import Link from "next/link";
 import styles from "../../../../styles/TokenPage.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ethers } from "ethers";
 
 type Props = {
   nft: NFT;
@@ -121,6 +122,9 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
     }
     return txResult;
   }
+
+
+  console.log(activeClaimCondition)
 
   return (
     <Box className={styles.container} m={"auto"}>
@@ -222,7 +226,7 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
                             <Box>
                               <Text>{activeClaimCondition.metadata?.name}</Text>
                               <Text>{`${activeClaimCondition?.availableSupply}/${activeClaimCondition?.maxClaimableSupply}`}</Text>
-                              <Text>{`${activeClaimCondition?.price.toNumber()} Matic`}</Text>
+                              <Text>{`${ethers.utils.formatUnits(activeClaimCondition?.price)} Matic`}</Text>
                               <Text>
                                 {activeClaimCondition.maxClaimablePerWallet}
                               </Text>
@@ -301,7 +305,7 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
 export const getStaticProps: GetStaticProps = async (context) => {
   const tokenId = context.params?.tokenId as string;
 
-  const sdk = new ThirdwebSDK("mumbai");
+  const sdk = new ThirdwebSDK(80001);
 
   const contract = await sdk.getContract(HASH_NFT_COLLECTION_ADDRESS);
 
@@ -323,7 +327,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const sdk = new ThirdwebSDK("mumbai");
+  const sdk = new ThirdwebSDK(80001);
 
   const contract = await sdk.getContract(HASH_NFT_COLLECTION_ADDRESS);
 

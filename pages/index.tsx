@@ -26,19 +26,26 @@ const Home: NextPage = () => {
 
   return (
     <Box className={styles.container}>
-      <Box className={styles.headingSection}>
+      <Box h={"80vh"} className={styles.headingSection} border={"1px  red"}>
         <Image
           width={"100%"}
           height={"100%"}
-          src="https://res.cloudinary.com/dddnxiqpq/image/upload/v1711090903/1_osiegz.png"
+          src="https://imgur.com/y05NSF6.png"
           alt="seaction_logo"
         />
       </Box>
       <Box>
         <Box className={styles.headLine}>
-          <Text className={styles.headingTxt}>
-            Discover the vast universe of <span>Hippie Aliens Cosmic Club</span>
-          </Text>
+          <Box className={styles.headingTxt}>
+            <Text fontSize={"30px"}>Discover the vast universe of</Text>
+            <Text
+              className={styles.gradientTxt}
+              letterSpacing={"4px"}
+              fontSize={"75px"}
+            >
+              HIPPIE ALIENS
+            </Text>
+          </Box>
           <p className={styles.para}>
             H.A.C.K is the gateway to Zuraverse. H.A.C.K NFTs introduce
             Zuraverse to the Web3 audience.
@@ -66,11 +73,6 @@ const Home: NextPage = () => {
             <TabPanel className={styles.grid}>
               <TabCard />
             </TabPanel>
-            {/* <TabPanel className={styles.grid}>
-              <Box onClick={redirectToConzura} w={'300px'} h={'200px'} border={'1px solid grey'} borderRadius={'15px'}>
-                <Image width={400} height={400} src={'https://imgur.com/KbSB528.png'}  alt="logo"/>
-              </Box>
-            </TabPanel> */}
           </TabPanels>
         </Tabs>
       </Box>

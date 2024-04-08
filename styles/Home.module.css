@@ -14,20 +14,26 @@
   object-fit: cover;
 }
 
-.headingSection > img{
+.headingSection > img {
   object-fit: cover;
-  object-position:left;
+  object-position: center;
 }
-
-
 
 .headLine {
   position: absolute;
   width: 700px;
-  right: 200px;
+  right: 150px;
   top: 150px;
   font-size: 49px;
   font-weight: bold;
+  padding: 30px;
+  border-radius: 5px;
+  background: rgba(20, 20, 20, 0.55);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .para {
@@ -41,6 +47,18 @@
 
 .headingTxt {
   color: white;
+  line-height: 60px;
+}
+
+.gradientTxt {
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(246, 27, 208, 1) 29%,
+    rgba(67, 30, 236, 1) 83%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientAnimation 10s linear infinite;
 }
 
 .grid {
@@ -92,6 +110,8 @@
 
   .headingSection img {
     height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .headLine {

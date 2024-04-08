@@ -57,7 +57,7 @@ import StatusIndicator from "../../components/StatusIndicator";
 import ClaimKarmaModal from "../../components/ClaimKarmaModal";
 import { KarmaLevel } from "../../components/KarmaLevel";
 import { SendFundModal } from "../../components/SendFundModal";
-
+import { SendNftModal } from "../../components/SendNftModal";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -74,6 +74,7 @@ export default function ProfilePage() {
   const { contract: nftCollection } = useContract(HASH_NFT_COLLECTION_ADDRESS);
   const toast = useToast();
   const [houseCardColor, setCardColor] = useState("");
+  const [userUpdate, setUserUpdate] = useState(false);
   const { contract: nftCollection2 } = useContract(
     CONZURA_NFT_COLLECTION_ADDRESS
   );
@@ -148,7 +149,7 @@ export default function ProfilePage() {
     } else if (currentUser?.hasHouseId === 2) {
       setCardColor("#FBC00E");
     } else if (currentUser?.hasHouseId === 3) {
-      setCardColor("#04D010");
+      setCardColor("#01692f");
     } else if (currentUser?.hasHouseId === 4) {
       setCardColor("#D01110");
     } else {
@@ -220,7 +221,7 @@ export default function ProfilePage() {
             `http://3.111.16.20:8080/user/profile`,
             payload
           );
-          // console.log(response.data);
+          console.log(response.data);
         }
         return;
       } catch (error) {
@@ -275,12 +276,12 @@ export default function ProfilePage() {
         hasHouseId: houseNfts[0]?.metadata.id,
         hasHouseMetadata: houseNfts[0]?.metadata,
       });
-      window.location.reload();
     }
   }, [houseNfts, currentUser]);
 
   // function for manipulating backend
   const updateBackend = (payload: any) => {
+    setUserUpdate(true);
     axios
       .put("http://3.111.16.20:8080/user/profile/update", payload, {
         headers: {
@@ -295,15 +296,17 @@ export default function ProfilePage() {
           status: "success",
           isClosable: true,
         });
+        setUserUpdate(false);
+        fetchData();
       })
       .catch((err) => {
         console.log(err);
-        console.log("something went wrong!");
         toast({
           title: `something went wrong`,
           status: "error",
           isClosable: true,
         });
+        setUserUpdate(false);
       });
   };
 
@@ -410,7 +413,12 @@ export default function ProfilePage() {
               textAlign={"end"}
               display={personalWallet === undefined ? "none" : "block"}
             >
-              <EditModal updateFunc={updateBackend} currentUser={currentUser} />
+              <EditModal
+                updateFunc={updateBackend}
+                fetchUser={fetchData}
+                currentUser={currentUser}
+                isUpdating={userUpdate}
+              />
             </Box>
             <Text
               mt={personalWallet === undefined ? "70px" : "30px"}
@@ -627,7 +635,7 @@ export default function ProfilePage() {
                                   src={musicData[0]?.cover}
                                 />
                               </Box>
-                              <Box color={'#141414'}>
+                              <Box color={"#141414"}>
                                 <Text>{musicData[0]?.name}</Text>
                                 <Text
                                   fontSize={"12px"}
@@ -638,7 +646,6 @@ export default function ProfilePage() {
                                   controls
                                   src="https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/2.mp3"
                                 ></audio>
-                                
                               </Box>
                             </Box>
                           </Box>
@@ -654,7 +661,7 @@ export default function ProfilePage() {
                     {personalWallet === undefined ? (
                       "No NFT's in your wallet"
                     ) : (
-                      <Button onClick={(e) => redirectToMint("house")}>
+                      <Button onClick={(e) => redirectToMint("hash")}>
                         Mint Hash
                       </Button>
                     )}
@@ -675,6 +682,7 @@ export default function ProfilePage() {
                               fontSize={"12px"}
                             >{`TOKEN ID #${e.metadata.id}`}</Text>
                             <Text>{e.metadata.name}</Text>
+                            <SendNftModal data={e?.metadata} />
                           </Box>
                         ))
                       : null}
@@ -687,7 +695,7 @@ export default function ProfilePage() {
                     {personalWallet === undefined ? (
                       "No NFT's in your wallet"
                     ) : (
-                      <Button onClick={(e) => redirectToMint("house")}>
+                      <Button onClick={(e) => redirectToMint("conzura")}>
                         Mint Conzura
                       </Button>
                     )}

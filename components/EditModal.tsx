@@ -11,12 +11,13 @@ import {
   Box,
   Button,
   Input,
+  Spinner,
 } from "@chakra-ui/react";
 import { FaEdit } from "react-icons/fa";
 import styles from "../styles/Editmodal.module.css";
 import { uploadCloudinary } from "../components/CloudinaryUpload";
 
-export function EditModal({ updateFunc, currentUser }: any) {
+export function EditModal({ updateFunc, currentUser, isUpdating }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const finalRef = React.useRef(null);
 
@@ -28,24 +29,10 @@ export function EditModal({ updateFunc, currentUser }: any) {
   const handleFormUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let cover;
-    let profile;
-
-    // if (coverImg !== "") {
-    //   cover = await uploadCloudinary(coverImg[0]);
-    // }
-    if (profileImg !== "") {
-      profile = await uploadCloudinary(profileImg[0]);
-    }
     const payload = {
       userName: name,
-      coverImg: cover,
-      profileImg: profile,
       email,
     };
-
-    console.log(payload);
-
     updateFunc(payload);
   };
 
@@ -117,7 +104,7 @@ export function EditModal({ updateFunc, currentUser }: any) {
                 color={"white"}
                 type="submit"
               >
-                Update
+                {isUpdating ? <Spinner /> : "Update"}
               </Button>
             </form>
           </ModalBody>
