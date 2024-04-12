@@ -20,44 +20,60 @@ import { useRouter } from "next/router";
 const Home: NextPage = () => {
   const router = useRouter();
 
-  const redirectToConzura = () => {
-    router.push("/conzura");
+  const redirectToHash = () => {
+    router.push("/hash_page/hash");
   };
 
   return (
     <Box className={styles.container}>
-      <Box h={"80vh"} className={styles.headingSection} border={"1px  red"}>
+      <Box
+        p={"0px 15px"}
+        h={"45vh"}
+        className={styles.headingSection}
+        border={"1px  red"}
+      >
         <Image
           width={"100%"}
           height={"100%"}
-          src="https://imgur.com/y05NSF6.png"
+          src="https://imgur.com/YeRU73n.png"
           alt="seaction_logo"
         />
       </Box>
       <Box>
         <Box className={styles.headLine}>
           <Box className={styles.headingTxt}>
-            <Text fontSize={"30px"}>Discover the vast universe of</Text>
-            <Text
-              className={styles.gradientTxt}
-              letterSpacing={"4px"}
-              fontSize={"75px"}
-            >
-              HIPPIE ALIENS
+            <Text fontSize={"20px"}>
+              Cruise through the vast expance of space through
+            </Text>
+            <Text letterSpacing={"4px"} fontSize={"50px"}>
+              HIPPIE ALIEN SPACE HOVERSHIP
             </Text>
           </Box>
           <p className={styles.para}>
-            H.A.C.K is the gateway to Zuraverse. H.A.C.K NFTs introduce
-            Zuraverse to the Web3 audience.
-            <br />
-            <span>
-              {" "}
-              They are the stepping stone in the formation of Zuraverse.
-            </span>
+            Welcome to the whimsical and psychedelic world of the Hippie Alien
+            Space Hovership (HASH) NFT Collection! Prepare to embark on a cosmic
+            journey like no other as you discover five extraordinary spaceships
+            used by the free-spirited Hippie Aliens to traverse the vast reaches
+            of the universe.
           </p>
           <Flex mt={7} gap={7}>
-            <Button bg={"blue"}>Connect Wallet</Button>
-            <Button>Read More</Button>
+            <Button
+              onClick={redirectToHash}
+              bg={"blue"}
+              color={"white"}
+              _hover={{ color: "black", bg: "white" }}
+            >
+              Mint Now
+            </Button>
+            <Button>
+              <a
+                href="https://zuraverse.xyz/"
+                target="_blank"
+                style={{ textDecoration: "none" }}
+              >
+                Read More
+              </a>
+            </Button>
           </Flex>
         </Box>
       </Box>

@@ -258,10 +258,13 @@
 .nftCard {
   height: fit-content;
   padding: 8px;
-  border: 1px solid grey;
 }
 
-.nftCard > button{
+.houseCard {
+  height: fit-content;
+}
+
+.nftCard > button {
   width: 100%;
   background-color: blue;
   color: white;
@@ -310,6 +313,22 @@
 
   .tabs {
     flex-direction: column-reverse;
+  }
+
+  .housePlayer {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+  }
+
+  .houseCard {
+    width: 100%;
+  }
+
+  .houseImg{
+    width: 800px;
   }
 
   .tabs > div {

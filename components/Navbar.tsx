@@ -51,6 +51,7 @@ const Navbar = () => {
         p={{ base: 2 }}
         pl={{ md: 12, base: "" }}
         pr={{ md: 12, base: "" }}
+        backdropBlur={'10px'}
       >
         <Flex alignItems={"center"} justifyContent={"space-between"} w={"100%"}>
           <Box onClick={redirectToHome} cursor={"pointer"}>

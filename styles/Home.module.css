@@ -19,11 +19,12 @@
   object-position: center;
 }
 
+
 .headLine {
   position: absolute;
-  width: 700px;
-  right: 150px;
-  top: 150px;
+  width: 50%;
+  right: 130px;
+  top: 140px;
   font-size: 49px;
   font-weight: bold;
   padding: 30px;

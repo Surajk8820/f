@@ -20,7 +20,6 @@ import {
   Web3Button,
   useActiveClaimCondition,
   useContract,
-  useMinimumNextBid,
   useValidDirectListings,
   useValidEnglishAuctions,
 } from "@thirdweb-dev/react";
@@ -36,6 +35,7 @@ import styles from "../../../../styles/TokenPage.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ethers } from "ethers";
+// import { ChainId } from "@thirdweb-dev/sdk";
 
 type Props = {
   nft: NFT;
@@ -305,7 +305,7 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
 export const getStaticProps: GetStaticProps = async (context) => {
   const tokenId = context.params?.tokenId as string;
 
-  const sdk = new ThirdwebSDK(80001);
+  const sdk = new ThirdwebSDK("polygon");
 
   const contract = await sdk.getContract(HASH_NFT_COLLECTION_ADDRESS);
 
@@ -327,7 +327,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const sdk = new ThirdwebSDK(80001);
+  const sdk = new ThirdwebSDK("polygon");
 
   const contract = await sdk.getContract(HASH_NFT_COLLECTION_ADDRESS);
 

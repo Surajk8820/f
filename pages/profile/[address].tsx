@@ -58,6 +58,7 @@ import ClaimKarmaModal from "../../components/ClaimKarmaModal";
 import { KarmaLevel } from "../../components/KarmaLevel";
 import { SendFundModal } from "../../components/SendFundModal";
 import { SendNftModal } from "../../components/SendNftModal";
+import MintHouseModal from "../../components/MintHouseModal";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -523,17 +524,7 @@ export default function ProfilePage() {
               ) : null}
             </Box>
           )}
-          <Box>
-            <button
-              onClick={() => {
-                disconnect();
-                router.push("/");
-              }}
-              className={styles.btn}
-            >
-              {address ? "Logout" : "Login"}
-            </button>
-          </Box>
+          <Box></Box>
         </Box>
         <Box className={styles.nftSection}>
           <Tabs borderRadius={"5px"} w={"100%"} gap={{ base: 2, md: 7 }}>
@@ -584,31 +575,29 @@ export default function ProfilePage() {
               </Box>
             </TabList>
             <TabPanels>
-              <TabPanel p={"20px 120px"}>
+              <TabPanel>
                 {houseNfts?.length === 0 ? (
                   <Box className={styles.emptyNFT}>
                     {personalWallet === undefined ? (
                       "No NFT's in your wallet"
                     ) : (
-                      <Button onClick={(e) => redirectToMint("house")}>
-                        Mint House
-                      </Button>
+                      <MintHouseModal />
                     )}
                   </Box>
                 ) : (
                   <Box>
                     {houseNfts && houseNfts.length > 0 ? (
                       <Box
-                        className={styles.nftCard}
+                        className={styles.houseCard}
                         key={houseNfts[0].metadata.id}
                       >
-                        <Text color={houseCardColor} fontSize={"30px"}>
+                        <Text color={houseCardColor} fontSize={{base : "20px", md : "30px"}}>
                           WELCOME IBOGAN
                         </Text>
                         <Text
                           fontWeight={200}
                           letterSpacing={"2px"}
-                          fontSize={"20px"}
+                          fontSize={{base : "16px", md : "20px"}}
                         >
                           A tranquil haven promoting calm, dependability, and
                           thoughtfulness. Ideal for those who value a peaceful
@@ -618,7 +607,7 @@ export default function ProfilePage() {
                           philosophers of the universe.
                         </Text>
                         <Box bg={houseCardColor} className={styles.housePlayer}>
-                          <Box className={styles.houseImg}>
+                          <Box display={{base : "none", md : "flex"}}  className={styles.houseImg}>
                             <Image
                               src={houseNfts[0].metadata?.image || ""}
                               height={"100%"}

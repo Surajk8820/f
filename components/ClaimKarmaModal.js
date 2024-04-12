@@ -19,9 +19,10 @@ import { useEffect } from "react";
 export default function ClaimKarmaModal({ func, isLoading, isClaimmed }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  useEffect(() => {
+  useEffect(() => { 
     onOpen();
   }, [onOpen]);
+
 
   return (
     <>

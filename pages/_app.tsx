@@ -10,18 +10,21 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useRouter } from "next/router";
+
 // import { useChain, useConnectionStatus } from "@thirdweb-dev/react";
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
 // You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
-const activeChain = "mumbai";
+const activeChain = "polygon";
+// const chain : any = defineChain(80002)
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   const smartWalletOptions = {
-    factoryAddress: "0x83bEd5fcF32E93674fBe85ed198874000f9270d0",
+    factoryAddress: "0x3De43234aEBe2696cEEEe7426582aAc034B427e1",
     gasless: true,
   };
 
@@ -29,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThirdwebProvider
       clientId={
         process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID ||
-        "a997f0721b38194f0841d8a732f91703"
+        "3149bb75c33cb71aee2b962425de48d9"
       }
       activeChain={activeChain}
       supportedWallets={[
